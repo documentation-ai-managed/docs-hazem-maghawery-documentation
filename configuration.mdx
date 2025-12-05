@@ -1,0 +1,162 @@
+---
+title: Configuration
+description: Learn how to configure and customize Hazem Maghawery Documentation for your needs
+---
+
+## Basic Settings
+
+<Callout kind="info">Access settings from the user menu in the top-right corner of the interface.</Callout>
+
+<Tabs>
+  <Tab title="Profile" icon="user">
+    Update your personal information, notification preferences, and display options.
+    
+    <CodeGroup tabs="API,UI">
+      ````javascript
+      // Update profile via API
+      const profileUpdate = {
+        name: 'John Doe',
+        email: 'john@example.com',
+        notifications: {
+          email: true,
+          inApp: false
+        }
+      };
+      await fetch('/api/user/profile', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(profileUpdate)
+      });
+      ````
+      ````javascript
+      // In the UI, navigate to Settings > Profile
+      // Update fields and save changes
+      const updatedProfile = {
+        displayName: 'John Doe',
+        timezone: 'America/New_York',
+        theme: 'dark'
+      };
+      ````
+    </CodeGroup>
+  </Tab>
+  <Tab title="Security" icon="shield">
+    Manage password, two-factor authentication, and API key settings.
+    
+    <Steps>
+      <Step title="Enable 2FA" icon="lock">
+        Go to Security settings and follow the setup wizard for two-factor authentication.
+      </Step>
+      <Step title="Generate API Key" icon="key">
+        Create API keys with specific permissions for different applications.
+      </Step>
+      <Step title="Review Sessions" icon="eye">
+        Check active sessions and revoke access from unrecognized devices.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Workspace Configuration
+
+<Columns cols={2}>
+  <Card title="Branding" icon="palette" href="#">
+    Customize logos, colors, and themes to match your organization's identity.
+  </Card>
+  <Card title="Permissions" icon="users" href="#">
+    Set up role-based access control for different team members.
+  </Card>
+</Columns>
+
+## Advanced Options
+
+<ExpandableGroup>
+  <Expandable title="Custom Domains" default-open="false">
+    Configure custom domain names for your documentation spaces.
+  </Expandable>
+  <Expandable title="SSO Integration" default-open="false">
+    Integrate with single sign-on providers like Okta or Auth0.
+  </Expandable>
+  <Expandable title="Webhook Endpoints" default-open="false">
+    Set up webhooks for real-time notifications on document changes.
+  </Expandable>
+</ExpandableGroup>
+
+## API Configuration
+
+<Callout kind="danger">Always use HTTPS for API communications and keep your API keys secure.</Callout>
+
+<Steps>
+  <Step title="Obtain API Key" icon="key">
+    Generate an API key from the developer settings section.
+  </Step>
+  <Step title="Set Base URL" icon="globe">
+    Configure the correct base URL for your environment (production, staging, development).
+  </Step>
+  <Step title="Configure Timeouts" icon="clock">
+    Set appropriate timeout values for API requests based on your use case.
+  </Step>
+</Steps>
+
+## Document Templates
+
+<Tabs>
+  <Tab title="Create Template" icon="file-plus">
+    Design custom templates for common document types used in your organization.
+    
+    <CodeGroup tabs="JSON,YAML">
+      ````json
+      {
+        "name": "API Documentation Template",
+        "fields": [
+          { "name": "endpoint", "type": "string", "required": true },
+          { "name": "method", "type": "enum", "values": ["GET", "POST", "PUT", "DELETE"] },
+          { "name": "description", "type": "text", "required": true }
+        ],
+        "structure": {
+          "sections": ["Overview", "Authentication", "Examples"]
+        }
+      }
+      ````
+      ````yaml
+      name: API Documentation Template
+      fields:
+        - name: endpoint
+          type: string
+          required: true
+        - name: method
+          type: enum
+          values: [GET, POST, PUT, DELETE]
+        - name: description
+          type: text
+          required: true
+      structure:
+        sections: [Overview, Authentication, Examples]
+      ````
+    </CodeGroup>
+  </Tab>
+  <Tab title="Apply Templates" icon="check-circle">
+    Apply templates to new documents for consistent structure and formatting.
+  </Tab>
+</Tabs>
+
+## Backup and Recovery
+
+<Expandable title="Automated Backups" default-open="true">
+  Configure automatic backups to cloud storage or local servers. Set backup frequency and retention policies.
+</Expandable>
+
+<Expandable title="Export Options" default-open="false">
+  Export your documentation in various formats including PDF, HTML, or Markdown for offline access.
+</Expandable>
+
+## Performance Tuning
+
+For large documentation spaces, optimize performance by enabling caching, compressing images, and limiting concurrent users per document.
+
+Use the analytics dashboard to monitor usage patterns and identify bottlenecks in your configuration.
+
+## Support and Resources
+
+Access our comprehensive help center for detailed configuration guides and video tutorials. Join our community forum for tips from other users.
+
+If you encounter issues, our support team is available 24/7 to help troubleshoot configuration problems.

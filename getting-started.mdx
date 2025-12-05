@@ -1,0 +1,124 @@
+---
+title: Getting Started
+description: Step-by-step guide to set up and begin using Hazem Maghawery Documentation
+---
+
+## Account Setup
+
+<Steps>
+  <Step title="Create Account" icon="user-plus">
+    Sign up for a free account at our platform. Choose between individual or team plans based on your needs.
+  </Step>
+  <Step title="Verify Email" icon="mail">
+    Check your inbox for a verification email and click the confirmation link to activate your account.
+  </Step>
+  <Step title="Set Up Profile" icon="settings">
+    Complete your profile with your name, organization details, and preferred settings.
+  </Step>
+</Steps>
+
+## Creating Your First Document
+
+<Callout kind="info">Documents support multiple formats including Markdown, rich text, and structured templates.</Callout>
+
+<Tabs>
+  <Tab title="From Template" icon="file-text">
+    Choose from pre-built templates for common documentation types like API guides, user manuals, or project plans.
+    
+    <CodeGroup tabs="Markdown,Rich Text">
+      ````markdown
+      # API Documentation
+      
+      ## Authentication
+      
+      Use your API key to authenticate requests:
+      
+      ```javascript
+      const response = await fetch('/api/data', {
+        headers: { 'Authorization': `Bearer ${API_KEY}` }
+      });
+      ```
+      ````
+      ````javascript
+      // Rich text content would be edited in the visual editor
+      const richContent = {
+        type: 'doc',
+        content: [
+          { type: 'heading', attrs: { level: 1 }, content: 'API Documentation' },
+          { type: 'heading', attrs: { level: 2 }, content: 'Authentication' },
+          { type: 'paragraph', content: 'Use your API key...' }
+        ]
+      };
+      ````
+    </CodeGroup>
+  </Tab>
+  <Tab title="Import Existing" icon="upload">
+    Import documents from external sources like GitHub repositories, Confluence spaces, or local files.
+    
+    <Expandable title="Supported Formats" default-open="false">
+      - Markdown files (.md)
+      - HTML documents
+      - PDF files (converted to editable format)
+      - JSON structured content
+    </Expandable>
+  </Tab>
+</Tabs>
+
+## Organizing Content
+
+<Columns cols={2}>
+  <Card title="Folders" icon="folder" href="#">
+    Create hierarchical folder structures to organize related documents.
+  </Card>
+  <Card title="Tags" icon="tag" href="#">
+    Apply tags for cross-cutting concerns like project phases or document types.
+  </Card>
+</Columns>
+
+## Collaboration Features
+
+<ExpandableGroup>
+  <Expandable title="Sharing Options" default-open="true">
+    Share documents publicly, with specific teams, or keep them private. Set read-only or edit permissions.
+  </Expandable>
+  <Expandable title="Comments System" default-open="false">
+    Leave inline comments and threaded discussions on specific content sections.
+  </Expandable>
+  <Expandable title="Version History" default-open="false">
+    View and restore previous versions of documents with detailed change logs.
+  </Expandable>
+</ExpandableGroup>
+
+## Integration Setup
+
+<Callout kind="tip">Integrations allow you to connect documentation with your development workflow.</Callout>
+
+<Steps>
+  <Step title="Connect Repository" icon="git-branch">
+    Link your GitHub or GitLab repository for automatic documentation updates.
+  </Step>
+  <Step title="Configure Webhooks" icon="webhook">
+    Set up webhooks to trigger documentation updates when code changes.
+  </Step>
+  <Step title="Test Integration" icon="check-circle">
+    Verify the integration works by making a test change and checking for updates.
+  </Step>
+</Steps>
+
+## Best Practices
+
+Use consistent naming conventions for documents and folders. Regularly review and update outdated content. Leverage templates for common document types to maintain consistency across your organization.
+
+Set up automated backups and consider using the search functionality to quickly find relevant information.
+
+For larger teams, establish guidelines for document ownership and review processes to ensure quality and accuracy.
+
+## Troubleshooting Common Issues
+
+<Expandable title="Login Problems" default-open="false">
+  If you can't log in, check that you've verified your email address and that your password meets the minimum requirements.
+</Expandable>
+
+<Expandable title="Import Failures" default-open="false">
+  Ensure your import files are in supported formats and don't exceed size limits. Check for special characters that might cause parsing issues.
+</Expandable>

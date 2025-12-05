@@ -1,0 +1,94 @@
+---
+title: Introduction
+description: Overview of Hazem Maghawery Documentation and its core capabilities
+---
+
+## Overview
+
+Welcome to Hazem Maghawery Documentation, your comprehensive platform for organizing and managing project documentation. This space provides powerful tools to create, structure, and maintain documentation that grows with your projects.
+
+Hazem Maghawery Documentation offers intuitive features for collaboration, version control, and seamless integration with development workflows.
+
+<Columns cols={3}>
+  <Card title="Quick Start" icon="play" href="getting-started">
+    Get up and running in minutes with our guided setup process.
+  </Card>
+  <Card title="API Integration" icon="link" href="api-integration">
+    Connect your documentation with external services and APIs.
+  </Card>
+  <Card title="Configuration" icon="settings" href="configuration">
+    Customize your documentation space to fit your team's needs.
+  </Card>
+</Columns>
+
+## Key Features
+
+<Tabs>
+  <Tab title="Organization" icon="folder">
+    <Expandable title="Document Structure" default-open="false">
+      Organize your documentation with hierarchical folders, tags, and categories. Support for nested structures ensures you can mirror your project's complexity.
+    </Expandable>
+    <Expandable title="Version Control" default-open="false">
+      Track changes over time with built-in version history. Compare revisions and rollback when needed.
+    </Expandable>
+  </Tab>
+  <Tab title="Collaboration" icon="users">
+    <Steps>
+      <Step title="Invite Team Members" icon="user-plus">
+        Add collaborators with granular permissions for viewing, editing, or administering your documentation.
+      </Step>
+      <Step title="Real-time Editing" icon="edit">
+        Work together simultaneously on the same document with live updates.
+      </Step>
+      <Step title="Comments and Reviews" icon="message-square">
+        Leave feedback and suggestions directly on content for streamlined review processes.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="Integration" icon="plug">
+    <Callout kind="info">API-first design enables seamless integration with your development tools and workflows.</Callout>
+    <CodeGroup tabs="REST,Webhook">
+      ```javascript
+const response = await fetch('/api/docs', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ title: 'New Document', content: '# Hello World' })
+});
+const doc = await response.json();
+```
+      ```javascript
+const webhookData = {
+  event: 'doc.updated',
+  payload: { id: docId, changes: ['title', 'content'] }
+};
+// Send to your webhook endpoint
+```
+    </CodeGroup>
+  </Tab>
+</Tabs>
+
+## Getting Started
+
+<Callout kind="tip">New users should begin with our getting started guide for the fastest onboarding experience.</Callout>
+
+The platform supports multiple documentation formats including Markdown, rich text, and structured content. Import existing documentation from various sources or start fresh with our intuitive editor.
+
+Advanced features like search indexing, automated backups, and export capabilities ensure your documentation remains accessible and secure.
+
+For teams working on multiple projects, create separate spaces with customized access controls and branding options.
+
+## Use Cases
+
+<ExpandableGroup>
+  <Expandable title="Software Development Teams" default-open="true">
+    Maintain API documentation, code examples, and deployment guides alongside your codebase.
+  </Expandable>
+  <Expandable title="Product Managers" default-open="false">
+    Create product requirements, user stories, and feature specifications in one centralized location.
+  </Expandable>
+  <Expandable title="Support Teams" default-open="false">
+    Build comprehensive knowledge bases with troubleshooting guides and FAQ sections.
+  </Expandable>
+</ExpandableGroup>
+
+This documentation platform adapts to your workflow, whether you're documenting APIs, creating user guides, or maintaining internal knowledge bases.

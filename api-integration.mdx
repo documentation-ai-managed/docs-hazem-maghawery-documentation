@@ -1,0 +1,206 @@
+---
+title: API Integration
+description: Learn how to integrate Hazem Maghawery Documentation with external services and APIs
+---
+
+## Overview
+
+<Callout kind="info">Our API-first architecture enables seamless integration with your existing tools and workflows.</Callout>
+
+<Tabs>
+  <Tab title="REST API" icon="code">
+    Access all platform features programmatically through our comprehensive REST API.
+    
+    <CodeGroup tabs="JavaScript,Python,cURL">
+      ````javascript
+      const response = await fetch('/api/docs', {
+        headers: {
+          'Authorization': `Bearer ${API_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      const docs = await response.json();
+      ````
+      ````python
+import requests
+
+headers = {
+    'Authorization': f'Bearer {API_KEY}',
+    'Content-Type': 'application/json'
+}
+
+response = requests.get('/api/docs', headers=headers)
+docs = response.json()
+      ````
+      ````bash
+      curl -X GET '/api/docs' \
+        -H 'Authorization: Bearer YOUR_API_KEY' \
+        -H 'Content-Type: application/json'
+      ````
+    </CodeGroup>
+  </Tab>
+  <Tab title="Webhooks" icon="webhook">
+    Receive real-time notifications about document changes and events.
+    
+    <Expandable title="Event Types" default-open="false">
+      - `doc.created`: New document created
+      - `doc.updated`: Document content modified
+      - `doc.deleted`: Document removed
+      - `comment.added`: New comment on document
+    </Expandable>
+  </Tab>
+  <Tab title="SDKs" icon="package">
+    Use our official SDKs for popular programming languages to simplify integration.
+  </Tab>
+</Tabs>
+
+## Authentication
+
+<Steps>
+  <Step title="Generate API Key" icon="key">
+    Create an API key from your account settings with appropriate permissions.
+  </Step>
+  <Step title="Include in Headers" icon="file-text">
+    Add the Authorization header to all API requests.
+  </Step>
+  <Step title="Handle Tokens" icon="refresh-cw">
+    Implement token refresh logic for long-running applications.
+  </Step>
+</Steps>
+
+## Common Use Cases
+
+<Columns cols={2}>
+  <Card title="CI/CD Integration" icon="git-branch" href="#">
+    Automatically update documentation when code changes are deployed.
+  </Card>
+  <Card title="Content Sync" icon="sync" href="#">
+    Sync documentation content with external knowledge bases or wikis.
+  </Card>
+</Columns>
+
+## Rate Limiting
+
+<Callout kind="danger">API requests are rate limited to prevent abuse. Monitor your usage and implement retry logic.</Callout>
+
+<ExpandableGroup>
+  <Expandable title="Rate Limits" default-open="true">
+    - 1000 requests per hour for read operations
+    - 100 requests per hour for write operations
+    - 10 concurrent requests maximum
+  </Expandable>
+  <Expandable title="Handling Limits" default-open="false">
+    Implement exponential backoff and respect Retry-After headers.
+  </Expandable>
+</ExpandableGroup>
+
+## Error Handling
+
+<CodeGroup tabs="JavaScript,Python">
+  ````javascript
+  try {
+    const response = await fetch('/api/docs', {
+      headers: { 'Authorization': `Bearer ${API_KEY}` }
+    });
+    
+    if (!response.ok) {
+      if (response.status === 429) {
+        // Rate limited - wait and retry
+        await new Promise(resolve => setTimeout(resolve, 60000));
+        return retryRequest();
+      }
+      throw new Error(`API Error: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('API request failed:', error);
+    // Handle network errors, timeouts, etc.
+  }
+  ````
+  ````python
+import time
+
+def make_api_request(url, api_key, max_retries=3):
+    headers = {'Authorization': f'Bearer {api_key}'}
+    
+    for attempt in range(max_retries):
+        try:
+            response = requests.get(url, headers=headers)
+            
+            if response.status_code == 429:
+                # Rate limited
+                retry_after = int(response.headers.get('Retry-After', 60))
+                time.sleep(retry_after)
+                continue
+            
+            response.raise_for_status()
+            return response.json()
+        except requests.RequestException as e:
+            if attempt == max_retries - 1:
+                raise e
+            time.sleep(2 ** attempt)  # Exponential backoff
+    
+    return None
+  ````
+</CodeGroup>
+
+## Webhook Configuration
+
+<Steps>
+  <Step title="Create Endpoint" icon="server">
+    Set up a webhook endpoint in your application that can receive POST requests.
+  </Step>
+  <Step title="Register Webhook" icon="plus">
+    Register the webhook URL in your documentation settings.
+  </Step>
+  <Step title="Verify Payloads" icon="check-circle">
+    Implement signature verification to ensure webhook authenticity.
+  </Step>
+</Steps>
+
+## SDK Examples
+
+<Expandable title="Node.js SDK" default-open="false">
+  ```javascript
+  const { DocumentationClient } = require('@hazemmaghawery/docs-sdk');
+  
+  const client = new DocumentationClient({
+    apiKey: 'your-api-key',
+    baseUrl: 'https://api.docs.example.com'
+  });
+  
+  // Create a document
+  const doc = await client.documents.create({
+    title: 'New API Guide',
+    content: '# Introduction\nThis is a new guide...'
+  });
+  
+  console.log('Created document:', doc.id);
+  ```
+</Expandable>
+
+<Expandable title="Python SDK" default-open="false">
+  ```python
+  from hazemmaghawery_docs import DocumentationClient
+  
+  client = DocumentationClient(
+      api_key='your-api-key',
+      base_url='https://api.docs.example.com'
+  )
+  
+  # List documents
+  docs = client.documents.list()
+  for doc in docs:
+      print(f"Document: {doc.title} (ID: {doc.id})")
+  ```
+</Expandable>
+
+## Best Practices
+
+Use environment-specific API keys for different deployment stages. Implement comprehensive logging for API requests and responses. Regularly rotate API keys for security.
+
+Test integrations thoroughly in staging environments before deploying to production. Monitor API usage and set up alerts for unusual activity.
+
+Document your integrations clearly for future maintenance and troubleshooting.

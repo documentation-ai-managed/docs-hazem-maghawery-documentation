@@ -1,0 +1,102 @@
+openapi: '3.0.0'
+info:
+  version: 1.0.0
+  title: Hazem Maghawery Documentation API
+  license:
+    name: MIT
+servers:
+  - url: https://api.docs.hazemmaghawery.com/v1
+paths:
+  /docs:
+    get:
+      summary: List all documentation entries
+      operationId: listDocs
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: A paged array of documentation entries
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Docs'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a new documentation entry
+      operationId: createDocs
+      responses:
+        201:
+          description: New documentation entry created successfully
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /docs/{docId}:
+    get:
+      summary: Retrieve a specific documentation entry by its unique identifier
+      operationId: showDocById
+      parameters:
+        - name: docId
+          in: path
+          required: true
+          description: The unique identifier of the documentation entry to retrieve
+          schema:
+            type: string
+      responses:
+        200:
+          description: The requested documentation entry with full details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Docs'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Doc:
+      required:
+        - id
+        - title
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+    Docs:
+      type: array
+      items:
+        $ref: '#/components/schemas/Doc'
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
